@@ -47,8 +47,10 @@
 
 ## Usage
 
-```console
-cookiecutter gh:sohang3112/cookiecutter-hypermodern-python --checkout=2025.03.16
+Using latest code in `main` as template:
+
+```bash
+$ cookiecutter gh:sohang3112/cookiecutter-hypermodern-python --checkout=main
 ```
 
 ## Features
