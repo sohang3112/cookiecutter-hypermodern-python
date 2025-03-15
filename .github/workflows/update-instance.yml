@@ -18,7 +18,7 @@ jobs:
       - name: Check out ${{ env.PROJECT }}
         uses: actions/checkout@v3
         with:
-          repository: "cjolowicz/${{ env.PROJECT }}"
+          repository: "sohang3112/${{ env.PROJECT }}"
           path: ${{ env.PROJECT }}
           token: ${{ secrets.X_GITHUB_TOKEN }}
       - name: Set up Python 3.10
@@ -36,7 +36,7 @@ jobs:
         env:
           GIT_AUTHOR_NAME: "GitHub Action"
           GIT_AUTHOR_EMAIL: "action@github.com"
-      - name: Push to cjolowicz/${{ env.PROJECT }}
+      - name: Push to sohang3112/${{ env.PROJECT }}
         run: |
           if ! git -C ${TEMPLATE} show --no-patch --format=%B ${GITHUB_SHA} | grep -q ^Retrocookie-Original-Commit:
           then
