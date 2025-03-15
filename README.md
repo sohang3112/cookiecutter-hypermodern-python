@@ -48,7 +48,7 @@
 ## Usage
 
 ```console
-cookiecutter gh:sohang3112/cookiecutter-hypermodern-python --checkout=2022.03.16
+cookiecutter gh:sohang3112/cookiecutter-hypermodern-python --checkout=2025.03.16
 ```
 
 ## Features
