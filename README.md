@@ -47,10 +47,10 @@
 
 ## Usage
 
-Using latest code in `main` as template:
+Do `pipx install cookiecutter` to install [cookiecutter](https://github.com/cookiecutter/cookiecutter), then use it like this:
 
 ```bash
-$ cookiecutter gh:sohang3112/cookiecutter-hypermodern-python --checkout=main
+$ cookiecutter gh:sohang3112/cookiecutter-hypermodern-python --checkout=main   # usage
 ```
 
 ## Features
