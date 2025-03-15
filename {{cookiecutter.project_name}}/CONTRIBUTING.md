@@ -86,23 +86,9 @@ Now locally test all Github Actions that _push_ to `main` branch:
 $ act push
 ```
 
-BUG: Github Actions failing locally with errors:
-
-```
-[Labeler/labeler          ] unable to get git ref: reference not found
-[Labeler/labeler          ] unable to get git revision: reference not found
-[Labeler/labeler          ]   🐳  docker cp src=/home/sohangchopra/.cache/act/crazy-max-ghaction-github-labeler@v4.0.0/ dst=/var/run/act/actions/crazy-max-ghaction-github-labeler@v4.0.0/
-[Labeler/labeler          ]   🐳  docker exec cmd=[/opt/acttoolcache/node/18.20.7/x64/bin/node /var/run/act/actions/crazy-max-ghaction-github-labeler@v4.0.0/dist/index.js] user= workdir=
-[Labeler/labeler          ]   ❗  ::error::Parameter token or opts.auth is required
-[Labeler/labeler          ]   ❌  Failure - Main Run Labeler
-[Labeler/labeler          ] exitcode '1': failure
-```
-
 ## How to Build Documentation locally
 
 Build _docs/_ locally using [Sphinx](https://www.sphinx-doc.org/en/master/usage/quickstart.html): `make html`.
-
-- BUG: Docs not building, giving error `make: *** [Makefile:24: .sphinx/requirements.txt] Error 1`.
 
 ## How to submit changes
 
