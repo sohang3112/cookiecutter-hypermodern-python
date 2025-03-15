@@ -2,7 +2,7 @@
 name = "{{cookiecutter.project_name}}"
 version = "{{cookiecutter.version}}"
 description = "{{cookiecutter.friendly_name}}"
-authors = ["{{cookiecutter.author}} <{{cookiecutter.email}}>"]
+authors = [{ name = "{{cookiecutter.author}}", email = "{{cookiecutter.email}}"}]
 license = "{{cookiecutter.license}}"
 readme = "README.md"
 homepage = "https://github.com/{{cookiecutter.github_user}}/{{cookiecutter.project_name}}"
@@ -14,44 +14,42 @@ packages = [
 ]
 {% endif -%}
 classifiers = [
-    "{{cookiecutter.development_status}}",
+    "{{cookiecutter.development_status}}"
 ]
+requires-python = ">=3.9"
+dependencies = []
 
-[tool.poetry.urls]
-Changelog = "https://github.com/{{cookiecutter.github_user}}/{{cookiecutter.project_name}}/releases"
+[project.urls]
+"Homepage" = "https://github.com/{{cookiecutter.github_user}}/{{cookiecutter.project_name}}"
+"Bug Reports" = "https://github.com/{{cookiecutter.github_user}}/{{cookiecutter.project_name}}/issues"
+"Source" = "https://github.com/{{cookiecutter.github_user}}/{{cookiecutter.project_name}}"
 
-[tool.poetry.dependencies]
-python = "^3.7"
-click = ">=8.0.1"
+[dependency-groups]
+dev = []
 
-[tool.poetry.dev-dependencies]
-Pygments = ">=2.10.0"
-bandit = ">=1.7.4"
-black = ">=21.10b0"
-coverage = {extras = ["toml"], version = ">=6.2"}
-darglint = ">=1.8.1"
-flake8 = ">=4.0.1"
-flake8-bugbear = ">=21.9.2"
-flake8-docstrings = ">=1.6.0"
-flake8-rst-docstrings = ">=0.2.5"
-furo = ">=2021.11.12"
-isort = ">=5.10.1"
-mypy = ">=0.930"
-pep8-naming = ">=0.12.1"
-pre-commit = ">=2.16.0"
-pre-commit-hooks = ">=4.1.0"
-pytest = ">=6.2.5"
-pyupgrade = ">=2.29.1"
-safety = ">=1.10.3"
-sphinx = ">=4.3.2"
-sphinx-autobuild = ">=2021.3.14"
-sphinx-click = ">=3.0.2"
-typeguard = ">=2.13.3"
-xdoctest = {extras = ["colors"], version = ">=0.15.10"}
-myst-parser = {version = ">=0.16.1"}
+[build-system]
+requires = ["setuptools", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
 
-[tool.poetry.scripts]
-{{cookiecutter.project_name}} = "{{cookiecutter.package_name}}.__main__:main"
+[tool.uv]
+link-mode = "copy"
+
+[tool.tox]
+requires = ["tox>=4.24"]
+env_list = ["3.9", "3.10", "3.11", "3.12", "3.13"]
+
+[tool.tox.env_run_base]
+description = "Run test under {base_python}"
+command = ""
+
+[tool.tox.env.type]
+description = "run type check on code base"
+deps = [
+    "mypy==1.11.2",
+    "types-cachetools>=5.5.0.20240820",
+    "types-chardet>=5.0.4.6",
+]
+commands = [["mypy", "src{/}tox"], ["mypy", "tests"]]
 
 [tool.coverage.paths]
 source = ["src", "*/site-packages"]
@@ -59,7 +57,7 @@ tests = ["tests", "*/tests"]
 
 [tool.coverage.run]
 branch = true
-source = ["{{cookiecutter.package_name}}", "tests"]
+source = ["{{cookiecutter.project_name}}", "tests"]
 
 [tool.coverage.report]
 show_missing = true
@@ -70,13 +68,16 @@ profile = "black"
 force_single_line = true
 lines_after_imports = 2
 
-[tool.mypy]
-strict = true
-warn_unreachable = true
-pretty = true
-show_column_numbers = true
-show_error_context = true
+[tool.flake8]
+rst-directives = "deprecated"
+docstring-convention = "google"
+per-file-ignores = "tests/*:S101"
+rst-roles = ["class", "const", "func", "meth", "mod", "ref"]
+ignore = ["E203", "E501", "RST201", "RST203", "RST301", "W503"]
+select = ["B", "B9", "C", "D", "DAR", "E", "F", "N", "RST", "S", "W"]
+max-line-length = 80
+max-complexity = 10
 
-[build-system]
-requires = ["poetry-core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
+[tool.darglint]
+strictness = "long"
+

@@ -1,7 +1,9 @@
 # Usage
 
-```{eval-rst}
-.. click:: {{cookiecutter.package_name}}.__main__:main
-    :prog: {{cookiecutter.project_name}}
-    :nested: full
-```
+## Running
+
+- `uv run python -m {{cookiecutter.project_name}}`
+
+### Misc Tooling
+
+- Type Checking: `uv run --dev mypy .`

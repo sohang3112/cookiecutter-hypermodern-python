@@ -48,15 +48,15 @@
 ## Usage
 
 ```console
-cookiecutter gh:cjolowicz/cookiecutter-hypermodern-python --checkout=2022.6.3
+cookiecutter gh:sohang3112/cookiecutter-hypermodern-python --checkout=2022.03.16
 ```
 
 ## Features
 
 <!-- features-begin -->
 
-- Packaging and dependency management with [Poetry]
-- Test automation with [Nox]
+- Packaging and dependency management with [Uv]
+- Test automation with [Tox]
 - Linting with [pre-commit] and [Flake8]
 - Continuous integration with [GitHub Actions]
 - Documentation with [Sphinx], [MyST], and [Read the Docs] using the [furo] theme
@@ -78,8 +78,10 @@ cookiecutter gh:cjolowicz/cookiecutter-hypermodern-python --checkout=2022.6.3
 - Generate command-line reference with [sphinx-click]
 - Manage project labels with [GitHub Labeler]
 
-The template supports Python 3.7, 3.8, 3.9, and 3.10.
+The template supports Python 3.9, 3.10, 3.11, 3.12 and 3.13.
 
+[uv]: https://docs.astral.sh/uv/
+[tox]: https://tox.wiki/en/4.24.2/
 [autodoc]: https://www.sphinx-doc.org/en/master/usage/extensions/autodoc.html
 [bandit]: https://github.com/PyCQA/bandit
 [black]: https://github.com/psf/black
@@ -95,8 +97,6 @@ The template supports Python 3.7, 3.8, 3.9, and 3.10.
 [mypy]: http://mypy-lang.org/
 [myst]: https://myst-parser.readthedocs.io/
 [napoleon]: https://www.sphinx-doc.org/en/master/usage/extensions/napoleon.html
-[nox]: https://nox.thea.codes/
-[poetry]: https://python-poetry.org/
 [pre-commit]: https://pre-commit.com/
 [prettier]: https://prettier.io/
 [pypi]: https://pypi.org/

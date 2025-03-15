@@ -31,7 +31,7 @@
 
 You can install _{{cookiecutter.friendly_name}}_ via [pip] from [PyPI]:
 
-```console
+```bash
 $ pip install {{cookiecutter.project_name}}
 ```
 
@@ -69,3 +69,7 @@ This project was generated from [@cjolowicz]'s [Hypermodern Python Cookiecutter]
 [license]: https://github.com/{{cookiecutter.github_user}}/{{cookiecutter.project_name}}/blob/main/LICENSE
 [contributor guide]: https://github.com/{{cookiecutter.github_user}}/{{cookiecutter.project_name}}/blob/main/CONTRIBUTING.md
 [command-line reference]: https://{{cookiecutter.project_name}}.readthedocs.io/en/latest/usage.html
+
+## Development Install
+
+Please see the [Development Install] for details.

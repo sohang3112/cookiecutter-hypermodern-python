@@ -37,55 +37,72 @@ Request features on the [Issue Tracker].
 
 ## How to set up your development environment
 
-You need Python 3.7+ and the following tools:
+_Recommended_: [Install `uv` package manager](https://docs.astral.sh/uv/guides/install-python/),
+then setup your environment - `uv` installs all Python dependencies (if required Python version isn't available, it will be auto-downloaded):
 
-- [Poetry]
-- [Nox]
-- [nox-poetry]
-
-Install the package with development requirements:
-
-```console
-$ poetry install
+```bash
+$ uv sync
 ```
 
-You can now run an interactive Python session,
-or the command-line interface:
+_Alternative_: Make sure `python --version` is 3.9+ and install using only standard library
+(useful if `uv` can't be used, for example due to corporate firewall policies):
 
-```console
-$ poetry run python
-$ poetry run {{cookiecutter.project_name}}
+```bash
+$ python -m venv .venv/
+$ source .venv/bin/activate
+$ pip install --editable .
 ```
-
-[poetry]: https://python-poetry.org/
-[nox]: https://nox.thea.codes/
-[nox-poetry]: https://nox-poetry.readthedocs.io/
 
 ## How to test the project
 
 Run the full test suite:
 
-```console
-$ nox
+```bash
+$ uv run --dev pytest
 ```
 
-List the available Nox sessions:
+Optionally, test for all supported Python versions:
 
-```console
-$ nox --list-sessions
+```bash
+$ uv run --dev tox
 ```
 
-You can also run a specific Nox session.
-For example, invoke the unit test suite like this:
+### Test Github Actions locally
 
-```console
-$ nox --session=tests
+Optionally test that Github Actions work by running [`act`](https://nektosact.com) command locally.
+
+Install latest `act` version:
+
+```bash
+$ sudo dnf install golang          # on RedHat Linux based systems; check Go language install methods for all platform: https://go.dev/doc/install
+$ git clone https://github.com:nektos/act.git
+$ cd act
+$ PREFIX=~/.local/ make install    # installs at ~/.local/bin/act ; default (without PREFIX specified) is to installs /usr/local/bin/act which requires root permission
 ```
 
-Unit tests are located in the _tests_ directory,
-and are written using the [pytest] testing framework.
+Now locally test all Github Actions that _push_ to `main` branch:
 
-[pytest]: https://pytest.readthedocs.io/
+```bash
+$ act push
+```
+
+BUG: Github Actions failing locally with errors:
+
+```
+[Labeler/labeler          ] unable to get git ref: reference not found
+[Labeler/labeler          ] unable to get git revision: reference not found
+[Labeler/labeler          ]   🐳  docker cp src=/home/sohangchopra/.cache/act/crazy-max-ghaction-github-labeler@v4.0.0/ dst=/var/run/act/actions/crazy-max-ghaction-github-labeler@v4.0.0/
+[Labeler/labeler          ]   🐳  docker exec cmd=[/opt/acttoolcache/node/18.20.7/x64/bin/node /var/run/act/actions/crazy-max-ghaction-github-labeler@v4.0.0/dist/index.js] user= workdir=
+[Labeler/labeler          ]   ❗  ::error::Parameter token or opts.auth is required
+[Labeler/labeler          ]   ❌  Failure - Main Run Labeler
+[Labeler/labeler          ] exitcode '1': failure
+```
+
+## How to Build Documentation locally
+
+Build _docs/_ locally using [Sphinx](https://www.sphinx-doc.org/en/master/usage/quickstart.html): `make html`.
+
+- BUG: Docs not building, giving error `make: *** [Makefile:24: .sphinx/requirements.txt] Error 1`.
 
 ## How to submit changes
 
@@ -93,17 +110,19 @@ Open a [pull request] to submit changes to this project.
 
 Your pull request needs to meet the following guidelines for acceptance:
 
-- The Nox test suite must pass without errors and warnings.
+- The Tox test suite must pass without errors and warnings.
 - Include unit tests. This project maintains 100% code coverage.
 - If your changes add functionality, update the documentation accordingly.
 
-Feel free to submit early, though—we can always iterate on this.
+Feel free to submit early, though — we can always iterate on this.
 
-To run linting and code formatting checks before committing your change, you can install pre-commit as a Git hook by running the following command:
+Please ensure to install [pre-commit](https://pre-commit.com/) git hooks so that linting & type checking runs before every commit:
 
-```console
-$ nox --session=pre-commit -- install
+```bash
+$ uv run --dev pre-commit install
 ```
+
+You can optionally run pre-commit checks any other time also: `uv run --dev pre-commit run`.
 
 It is recommended to open an issue before starting work on anything.
 This will allow a chance to talk it over with the owners and validate your approach.
